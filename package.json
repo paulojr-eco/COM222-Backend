@@ -1,5 +1,5 @@
 {
-  "name": "COM222-Backend",
+  "name": "backend",
   "version": "1.0.0",
   "description": "Trabalho COM222",
   "main": "server.ts",
