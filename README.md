@@ -1,2 +1,2 @@
-# COM222-Projeto
-Trabalho da Disciplina Desenvolvimento de Sistemas Web
+# COM222-Backend
+Trabalho da Disciplina COM222
