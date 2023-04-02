@@ -42,4 +42,20 @@ describe('SignUp Controller', () => {
       new Error('Missing param: passwordConfirmation')
     );
   });
+
+  test('should return 400 if password and passwordConfirmation not matches', async () => {
+    const sut = new SignUpController();
+    const httpRequest = {
+      body: {
+        email: 'email@example.com',
+        password: '1234567890',
+        passwordConfirmation: '0987654321',
+      },
+    };
+    const httpResponse = await sut.execute(httpRequest);
+    expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.body).toEqual(
+      new Error('Invalid param: passwordConfirmation')
+    );
+  });
 });

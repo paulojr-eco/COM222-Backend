@@ -1,3 +1,4 @@
+import { InvalidParamError } from '../errors/invalid-param';
 import { MissingParamError } from '../errors/missing-param';
 import { badRequest } from '../helpers/http';
 import { Controller } from '../protocols/controller';
@@ -22,6 +23,10 @@ export class SignUpController implements Controller {
       if (!request.body[field]) {
         return badRequest(new MissingParamError(field));
       }
+    }
+    const { email, password, passwordConfirmation } = request.body;
+    if (password !== passwordConfirmation) {
+      return badRequest(new InvalidParamError('passwordConfirmation'));
     }
     return Promise.resolve({ statusCode: 200, body: JSON.stringify(request) });
   }
