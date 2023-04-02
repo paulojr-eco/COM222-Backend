@@ -1,6 +1,7 @@
+import { AddAccount } from '../../domain/use-cases/add-account';
 import { InvalidParamError } from '../errors/invalid-param';
 import { MissingParamError } from '../errors/missing-param';
-import { badRequest, serverError } from '../helpers/http';
+import { badRequest, ok, serverError } from '../helpers/http';
 import { Controller } from '../protocols/controller';
 import { EmailValidator } from '../protocols/email-validator';
 import { HttpRequest, HttpResponse } from '../protocols/http';
@@ -14,7 +15,10 @@ export interface SignUpRequest extends HttpRequest {
 }
 
 export class SignUpController implements Controller {
-  constructor(private readonly emailValidator: EmailValidator) {}
+  constructor(
+    private readonly emailValidator: EmailValidator,
+    private readonly addAccount: AddAccount
+  ) {}
 
   async execute(request: SignUpRequest): Promise<HttpResponse> {
     try {
@@ -36,10 +40,8 @@ export class SignUpController implements Controller {
       if (!isEmailValid) {
         return badRequest(new InvalidParamError('email'));
       }
-      return Promise.resolve({
-        statusCode: 200,
-        body: JSON.stringify(request),
-      });
+      const account = await this.addAccount.add({ email, password });
+      return ok(account);
     } catch (err) {
       return serverError();
     }
