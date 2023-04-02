@@ -1,4 +1,5 @@
 import { describe, expect, test, vi } from 'vitest';
+import { ServerError } from '../errors/server-error';
 import { EmailValidator } from '../protocols/email-validator';
 import { SignUpController } from './sign-up';
 
@@ -96,5 +97,36 @@ describe('SignUp Controller', () => {
     const httpResponse = await sut.execute(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
     expect(httpResponse.body).toEqual(new Error('Invalid param: email'));
+  });
+
+  test('should call EmailValidator with correct email', async () => {
+    const { sut, emailValidatorStub } = makeSut();
+    const isValidSpy = vi.spyOn(emailValidatorStub, 'isValid');
+    const httpRequest = {
+      body: {
+        email: 'email@example.com',
+        password: '1234567890',
+        passwordConfirmation: '1234567890',
+      },
+    };
+    await sut.execute(httpRequest);
+    expect(isValidSpy).toHaveBeenCalledWith('email@example.com');
+  });
+
+  test('should return 500 if EmailValidator throws', async () => {
+    const { sut, emailValidatorStub } = makeSut();
+    vi.spyOn(emailValidatorStub, 'isValid').mockImplementationOnce(() => {
+      throw new Error('');
+    });
+    const httpRequest = {
+      body: {
+        email: 'email@example.com',
+        password: '1234567890',
+        passwordConfirmation: '1234567890',
+      },
+    };
+    const httpResponse = await sut.execute(httpRequest);
+    expect(httpResponse.statusCode).toBe(500);
+    expect(httpResponse.body).toEqual(new ServerError());
   });
 });
