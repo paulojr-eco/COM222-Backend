@@ -1,10 +1,20 @@
-import { StudentRepository } from '../../application/repositories/student';
-import { Student } from '../../domain/entities/student';
+import crypto from 'crypto';
+import {
+  CreateStudentData,
+  StudentRepository,
+} from '../../application/repositories/student';
+import { type Student } from '../../domain/entities/student';
 
 export class InMemoryStudentRepository implements StudentRepository {
   public students: Student[] = [];
 
-  async add(student: Student): Promise<void> {
-    await Promise.resolve(this.students.push(student));
+  async create(student: CreateStudentData): Promise<void> {
+    this.students.push({
+      id: crypto.randomUUID(),
+      props: {
+        email: student.email,
+        name: student.name,
+      },
+    });
   }
 }

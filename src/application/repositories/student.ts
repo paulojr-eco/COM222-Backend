@@ -1,5 +1,8 @@
-import { Student } from '../../domain/entities/student';
+export interface CreateStudentData {
+  name: string;
+  email: string;
+}
 
 export interface StudentRepository {
-  add(obj: Student): Promise<void>;
+  create(obj: CreateStudentData): Promise<void>;
 }

@@ -1,15 +1,46 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { InMemoryStudentRepository } from '../../tests/repositories/in-memory-students';
 import { CreateStudent } from './create-student';
 
+const makeSut = () => {
+  const inMemoryStudentRepository = new InMemoryStudentRepository();
+  const sut = new CreateStudent(inMemoryStudentRepository);
+  return {
+    sut,
+    studentRepository: inMemoryStudentRepository,
+  };
+};
+
 describe('Create student use case', () => {
-  it('should create a new student', async () => {
-    const inMemoryStudentRepository = new InMemoryStudentRepository();
-    const sut = new CreateStudent(inMemoryStudentRepository);
+  it('should call AddStudentRepository with correct values', async () => {
+    const { sut, studentRepository } = makeSut();
+    const addSpy = vi.spyOn(studentRepository, 'create');
     await sut.execute({
       name: 'student',
       email: 'student@example.com',
     });
-    expect(inMemoryStudentRepository.students.length).toBe(1);
+    expect(addSpy).toHaveBeenCalledWith(
+      expect.objectContaining({
+        name: 'student',
+        email: 'student@example.com',
+      })
+    );
+  });
+
+  it('should create a new student on success', async () => {
+    const { studentRepository, sut } = makeSut();
+    await sut.execute({
+      name: 'student',
+      email: 'student@example.com',
+    });
+    expect(studentRepository.students.length).toBe(1);
+    expect(studentRepository.students[0]).toEqual(
+      expect.objectContaining({
+        props: {
+          name: 'student',
+          email: 'student@example.com',
+        },
+      })
+    );
   });
 });

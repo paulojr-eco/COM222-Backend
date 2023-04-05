@@ -11,6 +11,9 @@ export class CreateStudent {
 
   async execute({ email, name }: ICreateStudentParams): Promise<void> {
     const student = Student.create({ email, name });
-    await this.studentRepository.add(student);
+    await this.studentRepository.create({
+      email: student.props.email,
+      name: student.props.name,
+    });
   }
 }
