@@ -17,4 +17,8 @@ export class InMemoryStudentRepository implements StudentRepository {
       },
     });
   }
+
+  async get(): Promise<Student[]> {
+    return this.students;
+  }
 }
