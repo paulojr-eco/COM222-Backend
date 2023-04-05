@@ -7,7 +7,8 @@
     "start": "tsx src/server.ts",
     "start:dev": "tsx watch src/server.ts",
     "build": "tsup src",
-    "test": "vitest",
+    "test": "vitest --passWithNoTests",
+    "test:coverage": "npm run test -- --coverage --watch=false",
     "prepare": "husky install"
   },
   "keywords": [],
@@ -17,13 +18,18 @@
     "@types/node": "^18.15.11",
     "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@typescript-eslint/parser": "^5.57.0",
+    "@vitest/coverage-istanbul": "^0.29.8",
     "eslint": "^8.37.0",
     "git-commit-msg-linter": "^4.9.2",
     "husky": "^8.0.0",
     "lint-staged": "^13.2.0",
+    "prisma": "^4.12.0",
     "tsup": "^6.7.0",
     "tsx": "^3.12.6",
     "typescript": "^5.0.3",
     "vitest": "^0.29.8"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.12.0"
   }
 }
