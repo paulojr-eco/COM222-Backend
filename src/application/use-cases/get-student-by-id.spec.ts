@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { InMemoryStudentRepository } from '../../tests/repositories/in-memory-students';
 import { GetStudentById } from './get-student-by-id';
 
@@ -40,6 +40,14 @@ describe('Get student by id use case', () => {
     const { sut } = makeSut();
     const result = await sut.execute('id');
     expect(result).toEqual(null);
+  });
+
+  it('should call StudentRepository with correct values', async () => {
+    const { sut, studentRepository } = makeSut();
+    await makeStudents(studentRepository);
+    const getSpy = vi.spyOn(studentRepository, 'getById');
+    await sut.execute('id1');
+    expect(getSpy).toHaveBeenCalledWith('id1');
   });
 
   it('should get a student on success', async () => {
