@@ -12,7 +12,7 @@ const makeSut = () => {
 };
 
 describe('Create student use case', () => {
-  it('should call AddStudentRepository with correct values', async () => {
+  it('should call StudentRepository with correct values', async () => {
     const { sut, studentRepository } = makeSut();
     const addSpy = vi.spyOn(studentRepository, 'create');
     await sut.execute({

@@ -27,14 +27,14 @@ const makeStudents = async (studentRepository: InMemoryStudentRepository) => {
 };
 
 describe('Get students use case', () => {
-  it('should get a empty array of students if no student were created', async () => {
+  it('should get an empty array of students if no student were created', async () => {
     const { sut } = makeSut();
     const results = await sut.execute();
     expect(results.length).toEqual(0);
     expect(results).toEqual(expect.arrayContaining([]));
   });
 
-  it('should get a array of students on success', async () => {
+  it('should get an array of students on success', async () => {
     const { studentRepository, sut } = makeSut();
     await makeStudents(studentRepository);
     const results = await sut.execute();

@@ -8,4 +8,5 @@ export interface CreateStudentData {
 export interface StudentRepository {
   create(obj: CreateStudentData): Promise<void>;
   get(): Promise<Student[]>;
+  getById(id: string): Promise<Student | null>;
 }
