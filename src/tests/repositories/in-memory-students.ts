@@ -38,4 +38,8 @@ export class InMemoryStudentRepository implements StudentRepository {
       }
     });
   }
+
+  async delete(id: string): Promise<void> {
+    this.students = this.students.filter((student) => student.id !== id);
+  }
 }
