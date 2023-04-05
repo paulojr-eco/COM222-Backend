@@ -12,18 +12,27 @@ const makeSut = () => {
 };
 
 const makeStudents = async (studentRepository: InMemoryStudentRepository) => {
-  studentRepository.create({
-    email: 'student1@example.com',
-    name: 'student1',
-  });
-  studentRepository.create({
-    email: 'student2@example.com',
-    name: 'student2',
-  });
-  studentRepository.create({
-    email: 'student@example.com',
-    name: 'student2',
-  });
+  studentRepository.create(
+    {
+      email: 'student1@example.com',
+      name: 'student1',
+    },
+    'id1'
+  );
+  studentRepository.create(
+    {
+      email: 'student2@example.com',
+      name: 'student2',
+    },
+    'id3'
+  );
+  studentRepository.create(
+    {
+      email: 'student3@example.com',
+      name: 'student3',
+    },
+    'id3'
+  );
 };
 
 describe('Get students use case', () => {

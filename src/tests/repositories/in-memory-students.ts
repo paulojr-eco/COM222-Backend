@@ -1,6 +1,7 @@
 import {
   CreateStudentData,
   StudentRepository,
+  UpdateStudentData,
 } from '../../application/repositories/student';
 import { Student } from '../../domain/entities/student';
 
@@ -25,5 +26,16 @@ export class InMemoryStudentRepository implements StudentRepository {
 
   async getById(id: string): Promise<Student | null> {
     return this.students.find((student) => student.id === id) ?? null;
+  }
+
+  async update(id: string, data: UpdateStudentData): Promise<void> {
+    this.students.forEach((student) => {
+      if (student.id === id) {
+        student.props = {
+          name: data.name,
+          email: data.email,
+        };
+      }
+    });
   }
 }

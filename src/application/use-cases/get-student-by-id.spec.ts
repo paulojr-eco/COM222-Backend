@@ -28,8 +28,8 @@ const makeStudents = async (studentRepository: InMemoryStudentRepository) => {
   );
   studentRepository.create(
     {
-      email: 'student@example.com',
-      name: 'student2',
+      email: 'student3@example.com',
+      name: 'student3',
     },
     'id3'
   );
