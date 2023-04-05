@@ -14,12 +14,12 @@ const makeSut = () => {
 describe('Create student use case', () => {
   it('should call StudentRepository with correct values', async () => {
     const { sut, studentRepository } = makeSut();
-    const addSpy = vi.spyOn(studentRepository, 'create');
+    const createSpy = vi.spyOn(studentRepository, 'create');
     await sut.execute({
       name: 'student',
       email: 'student@example.com',
     });
-    expect(addSpy).toHaveBeenCalledWith(
+    expect(createSpy).toHaveBeenCalledWith(
       expect.objectContaining({
         name: 'student',
         email: 'student@example.com',

@@ -48,12 +48,12 @@ describe('Update student use case', () => {
   it('should call StudentRepository with correct values', async () => {
     const { sut, studentRepository } = makeSut();
     await makeStudents(studentRepository);
-    const addSpy = vi.spyOn(studentRepository, 'update');
+    const updateSpy = vi.spyOn(studentRepository, 'update');
     await sut.execute('id1', {
       name: 'student',
       email: 'student@example.com',
     });
-    expect(addSpy).toHaveBeenCalledWith('id1', {
+    expect(updateSpy).toHaveBeenCalledWith('id1', {
       name: 'student',
       email: 'student@example.com',
     });
