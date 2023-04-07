@@ -4,8 +4,6 @@ import setupRoutes from './routes';
 
 const app = express();
 setupMiddlewares(app);
-setupRoutes(app).catch((err) => {
-  console.error(err);
-});
+setupRoutes(app).catch(console.error);
 
 export default app;

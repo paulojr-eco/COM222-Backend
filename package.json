@@ -7,7 +7,11 @@
     "start": "tsx src/main/server.ts",
     "start:dev": "tsx watch src/server.ts",
     "build": "tsup src",
+    "migrate:dev": "npx prisma migrate dev",
+    "migrate:test": "dotenv -e .env.test -- npx prisma migrate deploy",
     "test": "vitest --passWithNoTests",
+    "test:unit": "vitest --passWithNoTests --config ./vitest-unit.config.ts",
+    "test:e2e": "dotenv -e .env.test -- npx prisma migrate deploy;dotenv -e .env.test -- vitest --config ./vitest-e2e.config.ts --watch false",
     "test:coverage": "npm run test -- --coverage --watch=false",
     "prepare": "husky install"
   },
@@ -34,6 +38,7 @@
   },
   "dependencies": {
     "@prisma/client": "^4.12.0",
+    "dotenv-cli": "^7.2.1",
     "express": "^4.18.2"
   }
 }
