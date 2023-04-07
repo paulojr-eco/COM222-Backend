@@ -32,8 +32,8 @@ export class InMemoryStudentRepository implements StudentRepository {
     this.students.forEach((student) => {
       if (student.id === id) {
         student.props = {
-          name: data.name,
-          email: data.email,
+          name: data.name || student.props.name,
+          email: data.email || student.props.email,
         };
       }
     });

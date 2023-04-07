@@ -1,10 +1,10 @@
 import { describe, expect, it, vi } from 'vitest';
 import { InMemoryStudentRepository } from '../../tests/repositories/in-memory-students';
-import { CreateStudent } from './create-student';
+import { DbCreateStudent } from './create-student';
 
 const makeSut = () => {
   const inMemoryStudentRepository = new InMemoryStudentRepository();
-  const sut = new CreateStudent(inMemoryStudentRepository);
+  const sut = new DbCreateStudent(inMemoryStudentRepository);
   return {
     sut,
     studentRepository: inMemoryStudentRepository,

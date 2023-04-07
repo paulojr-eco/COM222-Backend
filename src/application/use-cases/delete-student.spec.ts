@@ -1,10 +1,10 @@
 import { describe, expect, it, vi } from 'vitest';
 import { InMemoryStudentRepository } from '../../tests/repositories/in-memory-students';
-import { DeleteStudent } from './delete-student';
+import { DbDeleteStudent } from './delete-student';
 
 const makeSut = () => {
   const inMemoryStudentRepository = new InMemoryStudentRepository();
-  const sut = new DeleteStudent(inMemoryStudentRepository);
+  const sut = new DbDeleteStudent(inMemoryStudentRepository);
   return {
     sut,
     studentRepository: inMemoryStudentRepository,
@@ -24,7 +24,7 @@ const makeStudents = async (studentRepository: InMemoryStudentRepository) => {
       email: 'student2@example.com',
       name: 'student2',
     },
-    'id3'
+    'id2'
   );
   studentRepository.create(
     {

@@ -1,14 +1,8 @@
-import { Student } from '../../domain/entities/student';
+import { IStudent, Student } from '../../domain/entities/student';
 
-export interface CreateStudentData {
-  name: string;
-  email: string;
-}
+export type CreateStudentData = IStudent;
 
-export interface UpdateStudentData {
-  name: string;
-  email: string;
-}
+export type UpdateStudentData = Partial<IStudent>;
 
 export interface StudentRepository {
   create(data: CreateStudentData): Promise<void>;

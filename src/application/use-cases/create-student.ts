@@ -1,19 +1,13 @@
-import { Student } from '../../domain/entities/student';
-import { StudentRepository } from '../repositories/student';
+import { CreateStudent } from '../../domain/use-cases/student';
+import { CreateStudentData, StudentRepository } from '../repositories/student';
 
-interface ICreateStudentParams {
-  name: string;
-  email: string;
-}
-
-export class CreateStudent {
+export class DbCreateStudent implements CreateStudent {
   constructor(private studentRepository: StudentRepository) {}
 
-  async execute({ email, name }: ICreateStudentParams): Promise<void> {
-    const student = Student.create({ email, name });
+  async execute({ email, name }: CreateStudentData): Promise<void> {
     await this.studentRepository.create({
-      email: student.props.email,
-      name: student.props.name,
+      email,
+      name,
     });
   }
 }

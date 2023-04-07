@@ -1,10 +1,10 @@
 import { describe, expect, it, vi } from 'vitest';
 import { InMemoryStudentRepository } from '../../tests/repositories/in-memory-students';
-import { GetStudentById } from './get-student-by-id';
+import { DbGetStudentById } from './get-student-by-id';
 
 const makeSut = () => {
   const inMemoryStudentRepository = new InMemoryStudentRepository();
-  const sut = new GetStudentById(inMemoryStudentRepository);
+  const sut = new DbGetStudentById(inMemoryStudentRepository);
   return {
     sut,
     studentRepository: inMemoryStudentRepository,
@@ -24,7 +24,7 @@ const makeStudents = async (studentRepository: InMemoryStudentRepository) => {
       email: 'student2@example.com',
       name: 'student2',
     },
-    'id3'
+    'id2'
   );
   studentRepository.create(
     {
