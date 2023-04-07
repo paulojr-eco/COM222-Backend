@@ -1,7 +1,7 @@
 import { Entity } from '../../core/domain/entity';
 
 export interface IStudent {
-  name: string;
+  nome: string;
   email: string;
 }
 

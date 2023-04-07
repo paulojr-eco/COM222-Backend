@@ -11,7 +11,7 @@ export class PrismaStudentRepository implements StudentRepository {
     await prisma.student.create({
       data: {
         email: data.email,
-        nome: data.name,
+        nome: data.nome,
       },
     });
   }

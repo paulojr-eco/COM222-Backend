@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { InMemoryStudentRepository } from '../../tests/repositories/in-memory-students';
+import { InMemoryStudentRepository } from '../repositories/in-memory/in-memory-students';
 import { DbCreateStudent } from './create-student';
 
 const makeSut = () => {
@@ -16,12 +16,12 @@ describe('Create student use case', () => {
     const { sut, studentRepository } = makeSut();
     const createSpy = vi.spyOn(studentRepository, 'create');
     await sut.execute({
-      name: 'student',
+      nome: 'student',
       email: 'student@example.com',
     });
     expect(createSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        name: 'student',
+        nome: 'student',
         email: 'student@example.com',
       })
     );
@@ -30,14 +30,15 @@ describe('Create student use case', () => {
   it('should create a new student on success', async () => {
     const { studentRepository, sut } = makeSut();
     await sut.execute({
-      name: 'student',
+      nome: 'student',
       email: 'student@example.com',
     });
     expect(studentRepository.students.length).toBe(1);
+    expect(studentRepository.students[0].id).toBeTruthy();
     expect(studentRepository.students[0]).toEqual(
       expect.objectContaining({
         props: {
-          name: 'student',
+          nome: 'student',
           email: 'student@example.com',
         },
       })

@@ -2,8 +2,8 @@ import {
   CreateStudentData,
   StudentRepository,
   UpdateStudentData,
-} from '../../application/repositories/student';
-import { Student } from '../../domain/entities/student';
+} from '../../../application/repositories/student';
+import { Student } from '../../../domain/entities/student';
 
 export class InMemoryStudentRepository implements StudentRepository {
   public students: Student[] = [];
@@ -13,7 +13,7 @@ export class InMemoryStudentRepository implements StudentRepository {
       Student.create(
         {
           email: student.email,
-          name: student.name,
+          nome: student.nome,
         },
         id
       )
@@ -32,7 +32,7 @@ export class InMemoryStudentRepository implements StudentRepository {
     this.students.forEach((student) => {
       if (student.id === id) {
         student.props = {
-          name: data.name || student.props.name,
+          nome: data.nome || student.props.nome,
           email: data.email || student.props.email,
         };
       }

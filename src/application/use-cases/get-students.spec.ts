@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { InMemoryStudentRepository } from '../../tests/repositories/in-memory-students';
+import { InMemoryStudentRepository } from '../repositories/in-memory/in-memory-students';
 import { DbGetStudents } from './get-students';
 
 const makeSut = () => {
@@ -15,21 +15,21 @@ const makeStudents = async (studentRepository: InMemoryStudentRepository) => {
   studentRepository.create(
     {
       email: 'student1@example.com',
-      name: 'student1',
+      nome: 'student1',
     },
     'id1'
   );
   studentRepository.create(
     {
       email: 'student2@example.com',
-      name: 'student2',
+      nome: 'student2',
     },
     'id2'
   );
   studentRepository.create(
     {
       email: 'student3@example.com',
-      name: 'student3',
+      nome: 'student3',
     },
     'id3'
   );
@@ -52,7 +52,7 @@ describe('Get students use case', () => {
       expect.arrayContaining([
         expect.objectContaining({
           props: {
-            name: 'student1',
+            nome: 'student1',
             email: 'student1@example.com',
           },
         }),

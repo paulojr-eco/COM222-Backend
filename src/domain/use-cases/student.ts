@@ -9,7 +9,7 @@ export interface GetStudents {
 }
 
 export interface GetStudentById {
-  execute: (id: string) => Promise<Student>;
+  execute: (id: string) => Promise<Student | null>;
 }
 
 export interface UpdateStudent {

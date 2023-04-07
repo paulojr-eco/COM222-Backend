@@ -4,10 +4,10 @@ import { CreateStudentData, StudentRepository } from '../repositories/student';
 export class DbCreateStudent implements CreateStudent {
   constructor(private studentRepository: StudentRepository) {}
 
-  async execute({ email, name }: CreateStudentData): Promise<void> {
+  async execute({ email, nome }: CreateStudentData): Promise<void> {
     await this.studentRepository.create({
       email,
-      name,
+      nome,
     });
   }
 }

@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { InMemoryStudentRepository } from '../../tests/repositories/in-memory-students';
+import { InMemoryStudentRepository } from '../repositories/in-memory/in-memory-students';
 import { DbUpdateStudent } from './update-student';
 
 const makeSut = () => {
@@ -15,21 +15,21 @@ const makeStudents = async (studentRepository: InMemoryStudentRepository) => {
   studentRepository.create(
     {
       email: 'student1@example.com',
-      name: 'student1',
+      nome: 'student1',
     },
     'id1'
   );
   studentRepository.create(
     {
       email: 'student2@example.com',
-      name: 'student2',
+      nome: 'student2',
     },
     'id2'
   );
   studentRepository.create(
     {
       email: 'student3@example.com',
-      name: 'student3',
+      nome: 'student3',
     },
     'id3'
   );
@@ -40,7 +40,7 @@ describe('Update student use case', () => {
     const { sut } = makeSut();
     const promise = sut.execute('id', {
       email: 'student@example.com',
-      name: 'student',
+      nome: 'student',
     });
     expect(promise).rejects.toThrow();
   });
@@ -50,11 +50,11 @@ describe('Update student use case', () => {
     await makeStudents(studentRepository);
     const updateSpy = vi.spyOn(studentRepository, 'update');
     await sut.execute('id1', {
-      name: 'student',
+      nome: 'student',
       email: 'student@example.com',
     });
     expect(updateSpy).toHaveBeenCalledWith('id1', {
-      name: 'student',
+      nome: 'student',
       email: 'student@example.com',
     });
   });
@@ -64,13 +64,13 @@ describe('Update student use case', () => {
     await makeStudents(studentRepository);
     await sut.execute('id1', {
       email: 'student@example.com',
-      name: 'student',
+      nome: 'student',
     });
     expect(studentRepository.students).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
           props: {
-            name: 'student',
+            nome: 'student',
             email: 'student@example.com',
           },
         }),
