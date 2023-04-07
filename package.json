@@ -12,7 +12,7 @@
     "test": "vitest --passWithNoTests",
     "test:unit": "vitest --passWithNoTests --config ./vitest-unit.config.ts",
     "test:e2e": "dotenv -e .env.test -- npx prisma migrate deploy;dotenv -e .env.test -- vitest --config ./vitest-e2e.config.ts --watch false",
-    "test:coverage": "npm run test -- --coverage --watch=false",
+    "test:coverage": "npm run test:unit -- --coverage --watch false; npm run test:e2e -- --coverage",
     "prepare": "husky install"
   },
   "keywords": [],
@@ -34,6 +34,7 @@
     "tsup": "^6.7.0",
     "tsx": "^3.12.6",
     "typescript": "^5.0.3",
+    "vite": "^4.2.1",
     "vitest": "^0.29.8"
   },
   "dependencies": {
