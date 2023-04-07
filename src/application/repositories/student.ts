@@ -11,7 +11,7 @@ export interface UpdateStudentData {
 }
 
 export interface StudentRepository {
-  create(obj: CreateStudentData): Promise<void>;
+  create(data: CreateStudentData): Promise<void>;
   get(): Promise<Student[]>;
   getById(id: string): Promise<Student | null>;
   update(id: string, data: UpdateStudentData): Promise<void>;

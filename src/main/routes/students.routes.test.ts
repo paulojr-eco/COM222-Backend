@@ -1,15 +1,29 @@
 import request from 'supertest';
-import { describe, test } from 'vitest';
+import { afterAll, beforeAll, beforeEach, describe, test } from 'vitest';
 import app from '../config/app';
+import prisma from '../config/prisma';
 
 describe('Students Routes', () => {
-  test('should return 200 on success', async () => {
+  beforeAll(async () => {
+    await prisma.$connect();
+  });
+
+  beforeEach(async () => {
+    await prisma.student.deleteMany();
+  });
+
+  afterAll(async () => {
+    await prisma.student.deleteMany();
+    await prisma.$disconnect();
+  });
+
+  test('should return 201 on success', async () => {
     await request(app)
       .post('/api/alunos')
       .send({
-        name: 'John',
+        nome: 'John',
         email: 'john@example.com',
       })
-      .expect(200);
+      .expect(201);
   });
 });
