@@ -59,6 +59,22 @@ describe('Update student use case', () => {
     });
   });
 
+  it('should update a student on success even if no data is provided', async () => {
+    const { studentRepository, sut } = makeSut();
+    await makeStudents(studentRepository);
+    await sut.execute('id1', {});
+    expect(studentRepository.students).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          props: {
+            nome: 'student1',
+            email: 'student1@example.com',
+          },
+        }),
+      ])
+    );
+  });
+
   it('should update a student on success', async () => {
     const { studentRepository, sut } = makeSut();
     await makeStudents(studentRepository);
