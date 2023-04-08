@@ -1,8 +1,12 @@
-import { Controller } from '../../core/application/controller';
-import { HttpRequest, HttpResponse } from '../../core/helpers/http';
-import { CreateStudent } from '../../domain/use-cases/student';
-import { MissingParamError } from '../errors';
-import { badRequest, created, serverError } from '../helpers/http-helper';
+import { MissingParamError } from '@application/errors';
+import {
+  badRequest,
+  created,
+  serverError,
+} from '@application/helpers/http-helper';
+import { Controller } from '@core/application/controller';
+import { HttpRequest, HttpResponse } from '@core/helpers/http';
+import { CreateStudent } from '@domain/use-cases/student';
 
 export class CreateStudentController implements Controller {
   constructor(private readonly createStudent: CreateStudent) {}

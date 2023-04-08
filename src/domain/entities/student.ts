@@ -1,4 +1,4 @@
-import { Entity } from '../../core/domain/entity';
+import { Entity } from '@core/domain/entity';
 
 export interface IStudent {
   nome: string;

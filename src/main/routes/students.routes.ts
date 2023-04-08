@@ -1,12 +1,13 @@
 import { type Router } from 'express';
-import { expressAdapterRoute } from '../adapter/express-route';
+
+import { expressAdapterRoute } from '@main/adapter/express-route';
 import {
   makeCreateStudentController,
   makeDeleteStudentController,
   makeGetStudentByIdController,
   makeGetStudentsController,
   makeUpdateStudentController,
-} from '../factories/student';
+} from '@main/factories/student';
 
 export default (router: Router): void => {
   router.post('/alunos', expressAdapterRoute(makeCreateStudentController()));

@@ -1,9 +1,10 @@
 import { describe, expect, test, vi } from 'vitest';
-import { Student } from '../../domain/entities/student';
-import { GetStudents } from '../../domain/use-cases/student';
-import { ServerError } from '../errors';
-import { InMemoryStudentRepository } from '../repositories/in-memory/in-memory-students';
-import { StudentRepository } from '../repositories/student';
+
+import { ServerError } from '@application/errors';
+import { InMemoryStudentRepository } from '@application/repositories/in-memory/in-memory-students';
+import { StudentRepository } from '@application/repositories/student';
+import { Student } from '@domain/entities/student';
+import { GetStudents } from '@domain/use-cases/student';
 import { GetStudentsController } from './get-students';
 
 const makeGetStudents = (studentRepository: StudentRepository): GetStudents => {

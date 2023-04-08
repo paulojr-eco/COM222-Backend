@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+import crypto from 'node:crypto';
 
 export abstract class Entity<T> {
   protected _id: string;

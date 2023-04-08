@@ -1,11 +1,11 @@
-import { Student } from '../../../domain/entities/student';
-import { prismaAdapterStudent } from '../../../main/adapter/prisma-entity';
-import prisma from '../../../main/config/prisma';
 import {
   CreateStudentData,
   StudentRepository,
   UpdateStudentData,
-} from '../student';
+} from '@application/repositories/student';
+import { Student } from '@domain/entities/student';
+import { prismaAdapterStudent } from '@main/adapter/prisma-entity';
+import prisma from '@main/config/prisma';
 
 export class PrismaStudentRepository implements StudentRepository {
   async create(data: CreateStudentData): Promise<void> {

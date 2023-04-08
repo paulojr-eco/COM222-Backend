@@ -1,5 +1,8 @@
-import { CreateStudent } from '../../domain/use-cases/student';
-import { CreateStudentData, StudentRepository } from '../repositories/student';
+import {
+  CreateStudentData,
+  StudentRepository,
+} from '@application/repositories/student';
+import { CreateStudent } from '@domain/use-cases/student';
 
 export class DbCreateStudent implements CreateStudent {
   constructor(private studentRepository: StudentRepository) {}

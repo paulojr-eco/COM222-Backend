@@ -1,5 +1,8 @@
-import { UpdateStudent } from '../../domain/use-cases/student';
-import { StudentRepository, UpdateStudentData } from '../repositories/student';
+import {
+  StudentRepository,
+  UpdateStudentData,
+} from '@application/repositories/student';
+import { UpdateStudent } from '@domain/use-cases/student';
 
 export class DbUpdateStudent implements UpdateStudent {
   constructor(private studentRepository: StudentRepository) {}

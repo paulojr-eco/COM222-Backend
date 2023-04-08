@@ -1,8 +1,9 @@
 import { describe, expect, test, vi } from 'vitest';
-import { DeleteStudent } from '../../domain/use-cases/student';
-import { MissingParamError, ServerError } from '../errors';
-import { InMemoryStudentRepository } from '../repositories/in-memory/in-memory-students';
-import { StudentRepository } from '../repositories/student';
+
+import { MissingParamError, ServerError } from '@application/errors';
+import { InMemoryStudentRepository } from '@application/repositories/in-memory/in-memory-students';
+import { StudentRepository } from '@application/repositories/student';
+import { DeleteStudent } from '@domain/use-cases/student';
 import { DeleteStudentController } from './delete-student';
 
 const makeDeleteStudent = (
