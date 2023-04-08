@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
-import { InMemoryStudentRepository } from '../repositories/in-memory/in-memory-students';
+
+import { InMemoryStudentRepository } from '@application/repositories/in-memory/in-memory-students';
 import { DbUpdateStudent } from './update-student';
 
 const makeSut = () => {

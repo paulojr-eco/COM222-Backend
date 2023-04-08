@@ -1,6 +1,6 @@
-import { Student } from '../../domain/entities/student';
-import { GetStudentById } from '../../domain/use-cases/student';
-import { StudentRepository } from '../repositories/student';
+import { StudentRepository } from '@application/repositories/student';
+import { Student } from '@domain/entities/student';
+import { GetStudentById } from '@domain/use-cases/student';
 
 export class DbGetStudentById implements GetStudentById {
   constructor(private studentRepository: StudentRepository) {}

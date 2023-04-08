@@ -1,4 +1,4 @@
-import { IStudent, Student } from '../entities/student';
+import { IStudent, Student } from '@domain/entities/student';
 
 export interface CreateStudent {
   execute: (account: IStudent) => Promise<void>;

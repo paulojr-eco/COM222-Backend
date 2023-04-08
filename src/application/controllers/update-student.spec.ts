@@ -1,8 +1,12 @@
 import { describe, expect, test, vi } from 'vitest';
-import { UpdateStudent } from '../../domain/use-cases/student';
-import { MissingParamError, ServerError } from '../errors';
-import { InMemoryStudentRepository } from '../repositories/in-memory/in-memory-students';
-import { StudentRepository, UpdateStudentData } from '../repositories/student';
+
+import { MissingParamError, ServerError } from '@application/errors';
+import { InMemoryStudentRepository } from '@application/repositories/in-memory/in-memory-students';
+import {
+  StudentRepository,
+  UpdateStudentData,
+} from '@application/repositories/student';
+import { UpdateStudent } from '@domain/use-cases/student';
 import { UpdateStudentController } from './update-student';
 
 const makeUpdateStudent = (

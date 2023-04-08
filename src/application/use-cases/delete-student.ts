@@ -1,5 +1,5 @@
-import { DeleteStudent } from '../../domain/use-cases/student';
-import { StudentRepository } from '../repositories/student';
+import { StudentRepository } from '@application/repositories/student';
+import { DeleteStudent } from '@domain/use-cases/student';
 
 export class DbDeleteStudent implements DeleteStudent {
   constructor(private studentRepository: StudentRepository) {}

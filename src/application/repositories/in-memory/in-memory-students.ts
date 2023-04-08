@@ -2,8 +2,8 @@ import {
   CreateStudentData,
   StudentRepository,
   UpdateStudentData,
-} from '../../../application/repositories/student';
-import { Student } from '../../../domain/entities/student';
+} from '@application/repositories/student';
+import { Student } from '@domain/entities/student';
 
 export class InMemoryStudentRepository implements StudentRepository {
   public students: Student[] = [];

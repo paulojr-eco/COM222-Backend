@@ -1,7 +1,8 @@
 import request from 'supertest';
 import { afterAll, beforeAll, beforeEach, describe, test } from 'vitest';
-import app from '../config/app';
-import prisma from '../config/prisma';
+
+import app from '@main/config/app';
+import prisma from '@main/config/prisma';
 
 describe('Students Routes', () => {
   beforeAll(async () => {

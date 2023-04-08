@@ -1,8 +1,12 @@
+import { MissingParamError, ServerError } from '@application/errors';
+import { InMemoryStudentRepository } from '@application/repositories/in-memory/in-memory-students';
 import { describe, expect, test, vi } from 'vitest';
-import { CreateStudent } from '../../domain/use-cases/student';
-import { MissingParamError, ServerError } from '../errors';
-import { InMemoryStudentRepository } from '../repositories/in-memory/in-memory-students';
-import { CreateStudentData, StudentRepository } from '../repositories/student';
+
+import {
+  CreateStudentData,
+  StudentRepository,
+} from '@application/repositories/student';
+import { CreateStudent } from '@domain/use-cases/student';
 import { CreateStudentController } from './create-student';
 
 const makeCreateStudent = (

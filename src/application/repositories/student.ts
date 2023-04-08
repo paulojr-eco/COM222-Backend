@@ -1,4 +1,4 @@
-import { IStudent, Student } from '../../domain/entities/student';
+import { IStudent, Student } from '@domain/entities/student';
 
 export type CreateStudentData = IStudent;
 

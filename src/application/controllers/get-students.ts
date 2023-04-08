@@ -1,7 +1,7 @@
-import { Controller } from '../../core/application/controller';
-import { HttpResponse } from '../../core/helpers/http';
-import { GetStudents } from '../../domain/use-cases/student';
-import { ok, serverError } from '../helpers/http-helper';
+import { ok, serverError } from '@application/helpers/http-helper';
+import { Controller } from '@core/application/controller';
+import { HttpResponse } from '@core/helpers/http';
+import { GetStudents } from '@domain/use-cases/student';
 
 export class GetStudentsController implements Controller {
   constructor(private readonly getStudents: GetStudents) {}
