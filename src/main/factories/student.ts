@@ -1,8 +1,8 @@
-import { CreateStudentController } from '@application/controllers/create-student';
-import { DeleteStudentController } from '@application/controllers/delete-student';
-import { GetStudentByIdController } from '@application/controllers/get-student-by-id';
-import { GetStudentsController } from '@application/controllers/get-students';
-import { UpdateStudentController } from '@application/controllers/update-student';
+import { CreateStudentController } from '@application/controllers/students/create-student';
+import { DeleteStudentController } from '@application/controllers/students/delete-student';
+import { GetStudentByIdController } from '@application/controllers/students/get-student-by-id';
+import { GetStudentsController } from '@application/controllers/students/get-students';
+import { UpdateStudentController } from '@application/controllers/students/update-student';
 import { PrismaStudentRepository } from '@application/repositories/prisma/student';
 import { DbCreateStudent } from '@application/use-cases/create-student';
 import { DbDeleteStudent } from '@application/use-cases/delete-student';
