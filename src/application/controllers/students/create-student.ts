@@ -13,14 +13,56 @@ export class CreateStudentController implements Controller {
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const requiredFields: string[] = ['nome', 'email'];
+      const requiredFields: string[] = [
+        'matricula',
+        'nome',
+        'status',
+        'serie',
+        'email',
+        'nascimento',
+        'sexo',
+        'endereco',
+        'emailResponsavel',
+      ];
       for (const field of requiredFields) {
         if (!httpRequest.body[field]) {
           return badRequest(new MissingParamError(field));
         }
       }
-      const { email, nome } = httpRequest.body;
-      await this.createStudent.execute({ email, nome });
+      const {
+        email,
+        nome,
+        CPF,
+        emailResponsavel,
+        endereco,
+        matricula,
+        nascimento,
+        nomeMae,
+        nomePai,
+        RG,
+        serie,
+        sexo,
+        status,
+        telefoneMae,
+        telefonePai,
+      } = httpRequest.body;
+      await this.createStudent.execute({
+        email,
+        nome,
+        CPF,
+        emailResponsavel,
+        endereco,
+        matricula,
+        nascimento,
+        nomeMae,
+        nomePai,
+        RG,
+        serie,
+        sexo,
+        status,
+        telefoneMae,
+        telefonePai,
+      });
       return created();
     } catch (err) {
       return serverError();

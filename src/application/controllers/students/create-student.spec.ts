@@ -1,7 +1,7 @@
-import { MissingParamError, ServerError } from '@application/errors';
-import { InMemoryStudentRepository } from '@application/repositories/in-memory/in-memory-students';
 import { describe, expect, test, vi } from 'vitest';
 
+import { MissingParamError, ServerError } from '@application/errors';
+import { InMemoryStudentRepository } from '@application/repositories/in-memory/in-memory-students';
 import {
   CreateStudentData,
   StudentRepository,
@@ -36,45 +36,139 @@ const makeSut = (): SutTypes => {
   };
 };
 
+const makeHttpStudentBody = (ignoredAttr?: keyof CreateStudentData) => {
+  const fakeStudent: CreateStudentData = {
+    matricula: 123,
+    nome: 'nome',
+    status: 'ATIVO',
+    serie: 'serie',
+    email: 'email@example.com',
+    nascimento: new Date('2000-01-01'),
+    sexo: 'MASCULINO',
+    endereco: 'endereco',
+    emailResponsavel: 'emailResponsavel@example.com',
+    CPF: null,
+    RG: null,
+    nomeMae: null,
+    nomePai: null,
+    telefoneMae: null,
+    telefonePai: null,
+  };
+
+  const filteredKeys = Object.keys(fakeStudent).filter(
+    (key) => !ignoredAttr || key !== ignoredAttr
+  );
+
+  return Object.assign(
+    {},
+    filteredKeys.reduce((acc: any, key) => {
+      acc[key] = fakeStudent[key as keyof CreateStudentData];
+      return acc;
+    }, {} as CreateStudentData)
+  );
+};
+
 describe('Create Student Controller', () => {
-  test('should return 400 if no name is provided', async () => {
+  test('should return 400 if no matricula is provided', async () => {
     const { sut } = makeSut();
     const httpRequest = {
-      body: {
-        email: 'email@example.com',
-      },
+      body: makeHttpStudentBody('matricula'),
+    };
+    const httpResponse = await sut.handle(httpRequest);
+    expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.body).toEqual(new MissingParamError('matricula'));
+  });
+
+  test('should return 400 if no nome is provided', async () => {
+    const { sut } = makeSut();
+    const httpRequest = {
+      body: makeHttpStudentBody('nome'),
     };
     const httpResponse = await sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
     expect(httpResponse.body).toEqual(new MissingParamError('nome'));
   });
 
+  test('should return 400 if no status is provided', async () => {
+    const { sut } = makeSut();
+    const httpRequest = {
+      body: makeHttpStudentBody('status'),
+    };
+    const httpResponse = await sut.handle(httpRequest);
+    expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.body).toEqual(new MissingParamError('status'));
+  });
+
+  test('should return 400 if no serie is provided', async () => {
+    const { sut } = makeSut();
+    const httpRequest = {
+      body: makeHttpStudentBody('serie'),
+    };
+    const httpResponse = await sut.handle(httpRequest);
+    expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.body).toEqual(new MissingParamError('serie'));
+  });
+
   test('should return 400 if no email is provided', async () => {
     const { sut } = makeSut();
     const httpRequest = {
-      body: {
-        nome: 'nome',
-      },
+      body: makeHttpStudentBody('email'),
     };
     const httpResponse = await sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(400);
     expect(httpResponse.body).toEqual(new MissingParamError('email'));
   });
 
+  test('should return 400 if no nascimento is provided', async () => {
+    const { sut } = makeSut();
+    const httpRequest = {
+      body: makeHttpStudentBody('nascimento'),
+    };
+    const httpResponse = await sut.handle(httpRequest);
+    expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.body).toEqual(new MissingParamError('nascimento'));
+  });
+
+  test('should return 400 if no sexo is provided', async () => {
+    const { sut } = makeSut();
+    const httpRequest = {
+      body: makeHttpStudentBody('sexo'),
+    };
+    const httpResponse = await sut.handle(httpRequest);
+    expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.body).toEqual(new MissingParamError('sexo'));
+  });
+
+  test('should return 400 if no endereco is provided', async () => {
+    const { sut } = makeSut();
+    const httpRequest = {
+      body: makeHttpStudentBody('endereco'),
+    };
+    const httpResponse = await sut.handle(httpRequest);
+    expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.body).toEqual(new MissingParamError('endereco'));
+  });
+
+  test('should return 400 if no emailResponsavel is provided', async () => {
+    const { sut } = makeSut();
+    const httpRequest = {
+      body: makeHttpStudentBody('emailResponsavel'),
+    };
+    const httpResponse = await sut.handle(httpRequest);
+    expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.body).toEqual(
+      new MissingParamError('emailResponsavel')
+    );
+  });
+
   test('should call CreateStudent with correct values', async () => {
     const { sut, createStudent } = makeSut();
     const createStudentSpy = vi.spyOn(createStudent, 'execute');
     const httpRequest = {
-      body: {
-        nome: 'nome',
-        email: 'email@example.com',
-      },
+      body: makeHttpStudentBody(),
     };
     await sut.handle(httpRequest);
-    expect(createStudentSpy).toHaveBeenCalledWith({
-      nome: 'nome',
-      email: 'email@example.com',
-    });
+    expect(createStudentSpy).toHaveBeenCalledWith(makeHttpStudentBody());
   });
 
   test('should return 500 if CreateStudent throws', async () => {
@@ -83,10 +177,7 @@ describe('Create Student Controller', () => {
       return await Promise.reject(new Error(''));
     });
     const httpRequest = {
-      body: {
-        nome: 'nome',
-        email: 'email@example.com',
-      },
+      body: makeHttpStudentBody(),
     };
     const httpResponse = await sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(500);
@@ -96,10 +187,7 @@ describe('Create Student Controller', () => {
   test('should return 201 if valid data is provided', async () => {
     const { sut } = makeSut();
     const httpRequest = {
-      body: {
-        nome: 'nome',
-        email: 'email@example.com',
-      },
+      body: makeHttpStudentBody(),
     };
     const httpResponse = await sut.handle(httpRequest);
     expect(httpResponse.statusCode).toBe(201);
