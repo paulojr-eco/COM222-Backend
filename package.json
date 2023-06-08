@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "tsx src/main/server.ts",
-    "start:dev": "tsx watch src/server.ts",
+    "start:dev": "tsx watch src/main/server.ts",
     "build": "tsup src",
     "migrate:dev": "npx prisma migrate dev",
     "migrate:test": "dotenv -e .env.test -- npx prisma migrate deploy",
