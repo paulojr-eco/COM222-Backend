@@ -1,14 +1,14 @@
-import { CreateStudentController } from '@application/controllers/create-student';
-import { DeleteStudentController } from '@application/controllers/delete-student';
-import { GetStudentByIdController } from '@application/controllers/get-student-by-id';
-import { GetStudentsController } from '@application/controllers/get-students';
-import { UpdateStudentController } from '@application/controllers/update-student';
+import { CreateStudentController } from '@application/controllers/students/create-student';
+import { DeleteStudentController } from '@application/controllers/students/delete-student';
+import { GetStudentByIdController } from '@application/controllers/students/get-student-by-id';
+import { GetStudentsController } from '@application/controllers/students/get-students';
+import { UpdateStudentController } from '@application/controllers/students/update-student';
 import { PrismaStudentRepository } from '@application/repositories/prisma/student';
-import { DbCreateStudent } from '@application/use-cases/create-student';
-import { DbDeleteStudent } from '@application/use-cases/delete-student';
-import { DbGetStudentById } from '@application/use-cases/get-student-by-id';
-import { DbGetStudents } from '@application/use-cases/get-students';
-import { DbUpdateStudent } from '@application/use-cases/update-student';
+import { DbCreateStudent } from '@application/use-cases/students/create-student';
+import { DbDeleteStudent } from '@application/use-cases/students/delete-student';
+import { DbGetStudentById } from '@application/use-cases/students/get-student-by-id';
+import { DbGetStudents } from '@application/use-cases/students/get-students';
+import { DbUpdateStudent } from '@application/use-cases/students/update-student';
 
 export const makeCreateStudentController = (): CreateStudentController => {
   const prismaStudentRepository = new PrismaStudentRepository();

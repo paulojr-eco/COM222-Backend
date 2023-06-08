@@ -6,6 +6,10 @@
 - Database: PostgreSQL
 - Testes: Vitest
 
+## Frontend
+
+[Figma](https://www.figma.com/file/kTLssDnNd3bfVetOcLuadz/Project-COM222?type=design&node-id=0-1&t=ZqsHUjzJ6ePt8mLe-0)
+
 ## Roles
 
 - Admin
@@ -45,32 +49,23 @@
   POST /alunos
 ```
 
-| Body               | Type             | Description                                               |
-| :----------------- | :--------------- | :-------------------------------------------------------- |
-| `foto`             | `file`           | **Required**. Foto do aluno                               |
-| `RM`               | `string`         | **Required**. Registro de Matrícula do aluno              |
-| `nome`             | `string`         | **Required**. Nome do aluno                               |
-| `nomeSocial`       | `string`         | Nome social do aluno                                      |
-| `status`           | `ativo, inativo` | **Required**. Status do aluno                             |
-| `serie`            | `FK`             | **Required**. FK(serie): Série em que se encontra o aluno |
-| `RA`               | `string`         | **Required**. Registro de Aluno                           |
-| `RG`               | `string`         | Documento RG do aluno                                     |
-| `CPF`              | `string`         | Documento CPF do aluno                                    |
-| `nascimento`       | `date`           | **Required**. Data de nascimento do aluno                 |
-| `sexo`             | `M, F , ND`      | **Required**. Sexo de Aluno                               |
-| `loginGsuite`      | `string`         | **Required**. Login na plataforma G Suite do aluno        |
-| `senhaGsuite`      | `string`         | **Required**. Senha na plataforma G Suite do aluno        |
-| `loginObjetivoSP`  | `string`         | **Required**. Login na plataforma Objetivo SP do aluno    |
-| `senhaObjetivoSP`  | `string`         | **Required**. Senha na plataforma Objetivo SP do aluno    |
-| `endereço`         | `FK`             | **Required**. FK(endereco):Data de nascimento do aluno    |
-| `nomePai`          | `string`         | Nome do pai do aluno                                      |
-| `telefonePai`      | `string`         | Telefone do pai do aluno                                  |
-| `nomeMae`          | `string`         | Nome da mãe do aluno                                      |
-| `telefoneMae`      | `string`         | Telefone da mãe do aluno                                  |
-| `emailResponsavel` | `string`         | **Required**. Email do responsável pelo aluno             |
-| `laudos`           | `file[]`         | Laudos médicos relacionados ao aluno                      |
-| `observacoes`      | `string`         | Observações médicas do aluno                              |
-| `docs`             | `file[]`         | **Required**. Documentos relacionados ao aluno            |
+| Body               | Type             | Description                                    |
+| :----------------- | :--------------- | :--------------------------------------------- |
+| `matricula`        | `string`         | **Required**. Registro de Matrícula do aluno   |
+| `nome`             | `string`         | **Required**. Nome do aluno                    |
+| `status`           | `ativo, inativo` | **Required**. Status do aluno                  |
+| `serie`            | `string`         | **Required**. Série em que se encontra o aluno |
+| `email`            | `string`         | **Required**. Email do aluno                   |
+| `RG`               | `string`         | Documento RG do aluno                          |
+| `CPF`              | `string`         | Documento CPF do aluno                         |
+| `nascimento`       | `date`           | **Required**. Data de nascimento do aluno      |
+| `sexo`             | `M, F , ND`      | **Required**. Sexo de Aluno                    |
+| `endereço`         | `string`         | **Required**. Data de nascimento do aluno      |
+| `nomePai`          | `string`         | Nome do pai do aluno                           |
+| `telefonePai`      | `string`         | Telefone do pai do aluno                       |
+| `nomeMae`          | `string`         | Nome da mãe do aluno                           |
+| `telefoneMae`      | `string`         | Telefone da mãe do aluno                       |
+| `emailResponsavel` | `string`         | **Required**. Email do responsável pelo aluno  |
 
 ### Editar um aluno
 
@@ -82,32 +77,23 @@
 | :-------- | :------- | :------------------------ |
 | `id`      | `string` | **Required**. Id do aluno |
 
-| Body               | Type             | Description                                 |
-| :----------------- | :--------------- | :------------------------------------------ |
-| `foto`             | `file`           | Foto do aluno                               |
-| `RM`               | `string`         | Registro de Matrícula do aluno              |
-| `nome`             | `string`         | Nome do aluno                               |
-| `nomeSocial`       | `string`         | Nome social do aluno                        |
-| `status`           | `ativo, inativo` | Status do aluno                             |
-| `serie`            | `FK`             | FK(serie): Série em que se encontra o aluno |
-| `RA`               | `string`         | Registro de Aluno                           |
-| `RG`               | `string`         | Documento RG do aluno                       |
-| `CPF`              | `string`         | Documento CPF do aluno                      |
-| `nascimento`       | `date`           | Data de nascimento do aluno                 |
-| `sexo`             | `M, F , ND`      | Sexo de Aluno                               |
-| `loginGsuite`      | `string`         | Login na plataforma G Suite do aluno        |
-| `senhaGsuite`      | `string`         | Senha na plataforma G Suite do aluno        |
-| `loginObjetivoSP`  | `string`         | Login na plataforma Objetivo SP do aluno    |
-| `senhaObjetivoSP`  | `string`         | Senha na plataforma Objetivo SP do aluno    |
-| `endereço`         | `FK`             | FK(endereco):Data de nascimento do aluno    |
-| `nomePai`          | `string`         | Nome do pai do aluno                        |
-| `telefonePai`      | `string`         | Telefone do pai do aluno                    |
-| `nomeMae`          | `string`         | Nome da mãe do aluno                        |
-| `telefoneMae`      | `string`         | Telefone da mãe do aluno                    |
-| `emailResponsavel` | `string`         | Email do responsável pelo aluno             |
-| `laudos`           | `file[]`         | Laudos médicos relacionados ao aluno        |
-| `observacoes`      | `string`         | Observações médicas do aluno                |
-| `docs`             | `file[]`         | Documentos relacionados ao aluno            |
+| Body               | Type             | Description                      |
+| :----------------- | :--------------- | :------------------------------- |
+| `matricula`        | `string`         | Registro de Matrícula do aluno   |
+| `nome`             | `string`         | Nome do aluno                    |
+| `status`           | `ativo, inativo` | Status do aluno                  |
+| `serie`            | `serie`          | Série em que se encontra o aluno |
+| `email`            | `string`         | Email do aluno                   |
+| `RG`               | `string`         | Documento RG do aluno            |
+| `CPF`              | `string`         | Documento CPF do aluno           |
+| `nascimento`       | `date`           | Data de nascimento do aluno      |
+| `sexo`             | `M, F , ND`      | Sexo de Aluno                    |
+| `endereço`         | `string`         | Data de nascimento do aluno      |
+| `nomePai`          | `string`         | Nome do pai do aluno             |
+| `telefonePai`      | `string`         | Telefone do pai do aluno         |
+| `nomeMae`          | `string`         | Nome da mãe do aluno             |
+| `telefoneMae`      | `string`         | Telefone da mãe do aluno         |
+| `emailResponsavel` | `string`         | Email do responsável pelo aluno  |
 
 ### Deletar um aluno
 
@@ -147,7 +133,6 @@
 
 | Body              | Type                                                        | Description                                                  |
 | :---------------- | :---------------------------------------------------------- | :----------------------------------------------------------- |
-| `foto`            | `file`                                                      | **Required**. Foto do funcionário                            |
 | `registro`        | `string`                                                    | **Required**. Registro do funcionário                        |
 | `nome`            | `string`                                                    | **Required**. Nome do funcionário                            |
 | `nomeSocial`      | `string`                                                    | Nome social do funcionário                                   |
@@ -166,7 +151,6 @@
 | `loginObjetivoSP` | `string`                                                    | **Required**. Login na plataforma Objetivo SP do funcionário |
 | `senhaObjetivoSP` | `string`                                                    | **Required**. Senha na plataforma Objetivo SP do funcionário |
 | `endereço`        | `FK`                                                        | **Required**. FK(endereco):Data de nascimento do funcionário |
-| `docs`            | `file[]`                                                    | **Required**. Documentos relacionados ao funcionário         |
 
 ### Editar um funcionário
 

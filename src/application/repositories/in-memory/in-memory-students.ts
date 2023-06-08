@@ -12,8 +12,7 @@ export class InMemoryStudentRepository implements StudentRepository {
     this.students.push(
       Student.create(
         {
-          email: student.email,
-          nome: student.nome,
+          ...student,
         },
         id
       )
@@ -32,8 +31,8 @@ export class InMemoryStudentRepository implements StudentRepository {
     this.students.forEach((student) => {
       if (student.id === id) {
         student.props = {
-          nome: data.nome || student.props.nome,
-          email: data.email || student.props.email,
+          ...student.props,
+          ...data,
         };
       }
     });

@@ -1,10 +1,14 @@
-import { Student } from '@domain/entities/student';
-import { Student as PrismaStudent } from '@prisma/client';
+import {
+  CreateStudentData,
+  StudentRepository,
+} from '@application/repositories/student';
+import { CreateStudent } from '@domain/use-cases/student';
 
-export const prismaAdapterStudent = (prismaStudent: PrismaStudent): Student => {
-  const {
+export class DbCreateStudent implements CreateStudent {
+  constructor(private studentRepository: StudentRepository) {}
+
+  async execute({
     email,
-    id,
     nome,
     CPF,
     RG,
@@ -19,9 +23,8 @@ export const prismaAdapterStudent = (prismaStudent: PrismaStudent): Student => {
     status,
     telefoneMae,
     telefonePai,
-  } = prismaStudent;
-  const student = Student.create(
-    {
+  }: CreateStudentData): Promise<void> {
+    await this.studentRepository.create({
       email,
       nome,
       CPF,
@@ -37,8 +40,6 @@ export const prismaAdapterStudent = (prismaStudent: PrismaStudent): Student => {
       status,
       telefoneMae,
       telefonePai,
-    },
-    id
-  );
-  return student;
-};
+    });
+  }
+}

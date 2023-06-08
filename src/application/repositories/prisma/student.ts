@@ -9,11 +9,40 @@ import prisma from '@main/config/prisma';
 
 export class PrismaStudentRepository implements StudentRepository {
   async create(data: CreateStudentData): Promise<void> {
-    const { email, nome } = data;
+    const {
+      email,
+      nome,
+      CPF,
+      RG,
+      emailResponsavel,
+      endereco,
+      matricula,
+      nascimento,
+      nomeMae,
+      nomePai,
+      serie,
+      sexo,
+      status,
+      telefoneMae,
+      telefonePai,
+    } = data;
     await prisma.student.create({
       data: {
         email,
         nome,
+        emailResponsavel,
+        endereco,
+        nascimento,
+        serie,
+        sexo,
+        status,
+        CPF,
+        matricula,
+        nomeMae,
+        nomePai,
+        RG,
+        telefoneMae,
+        telefonePai,
       },
     });
   }
@@ -36,12 +65,41 @@ export class PrismaStudentRepository implements StudentRepository {
   }
 
   async update(id: string, data: UpdateStudentData): Promise<void> {
-    const { email, nome } = data;
+    const {
+      email,
+      nome,
+      CPF,
+      RG,
+      emailResponsavel,
+      endereco,
+      matricula,
+      nascimento,
+      nomeMae,
+      nomePai,
+      serie,
+      sexo,
+      status,
+      telefoneMae,
+      telefonePai,
+    } = data;
     await prisma.student.update({
       where: { id },
       data: {
         email,
         nome,
+        CPF,
+        emailResponsavel,
+        endereco,
+        matricula,
+        nascimento,
+        nomeMae,
+        nomePai,
+        RG,
+        serie,
+        sexo,
+        status,
+        telefoneMae,
+        telefonePai,
       },
     });
   }
