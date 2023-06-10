@@ -21,6 +21,26 @@ enum Gender {
   NAODEFINIDO
 }
 
+enum Relation {
+  CONTRATADO
+  CONCURSADO
+  SUBSTITUTO
+}
+
+enum Role {
+  DIRECAO
+  COORDENACAO
+  SECRETARIA
+  PROFESSOR
+}
+
+enum Scholarity {
+  GRADUACAO
+  POSGRADUACAO
+  MESTRADO
+  DOUTORADO
+}
+
 model Student {
   id               String   @id @default(uuid())
   matricula        Int      @default(autoincrement())
@@ -38,4 +58,21 @@ model Student {
   telefonePai      String?
   nomeMae          String?
   telefoneMae      String?
+}
+
+model Employee {
+  id           String     @id @default(uuid())
+  registro     Int        @default(autoincrement())
+  nome         String
+  email        String
+  status       Status
+  vinculo      Relation
+  admissao     DateTime
+  cargo        Role
+  RG           String
+  CPF          String
+  nascimento   DateTime
+  sexo         Gender
+  escolaridade Scholarity
+  endereco     String
 }

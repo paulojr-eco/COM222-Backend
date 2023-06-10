@@ -131,26 +131,21 @@
   POST /funcionarios
 ```
 
-| Body              | Type                                                        | Description                                                  |
-| :---------------- | :---------------------------------------------------------- | :----------------------------------------------------------- |
-| `registro`        | `string`                                                    | **Required**. Registro do funcionário                        |
-| `nome`            | `string`                                                    | **Required**. Nome do funcionário                            |
-| `nomeSocial`      | `string`                                                    | Nome social do funcionário                                   |
-| `status`          | `ativo, inativo`                                            | **Required**. Status do funcionário                          |
-| `vinculo`         | `Contratado, Concursado, Convênio, Estatutário, Substituto` | **Required**. Vínculo empregatício do funcionário            |
-| `admissao`        | `date`                                                      | **Required**. Date de admissão de Funcionário                |
-| `cargo`           | `Direção, Coordenação, Secretaria, Professor, Auxiliar`     | **Required**. Cargo empregatício do funcionário              |
-| `RG`              | `string`                                                    | **Required**. Documento RG do funcionário                    |
-| `CPF`             | `string`                                                    | **Required**. Documento CPF do funcionário                   |
-| `nascimento`      | `date`                                                      | **Required**. Data de nascimento do funcionário              |
-| `sexo`            | `M, F , ND`                                                 | **Required**. Sexo de Funcionário                            |
-| `estadoCivil`     | `Solteiro, Casado, Separado, Divorciado, Viúvo`             | **Required**. Estado civil do funcionário                    |
-| `escolaridade`    | `Graduação, Pós-graduação, Mestrado, Doutorado`             | **Required**. Nível de escolaridade do funcionário           |
-| `loginGsuite`     | `string`                                                    | **Required**. Login na plataforma G Suite do funcionário     |
-| `senhaGsuite`     | `string`                                                    | **Required**. Senha na plataforma G Suite do funcionário     |
-| `loginObjetivoSP` | `string`                                                    | **Required**. Login na plataforma Objetivo SP do funcionário |
-| `senhaObjetivoSP` | `string`                                                    | **Required**. Senha na plataforma Objetivo SP do funcionário |
-| `endereço`        | `FK`                                                        | **Required**. FK(endereco):Data de nascimento do funcionário |
+| Body           | Type                                            | Description                                        |
+| :------------- | :---------------------------------------------- | :------------------------------------------------- |
+| `registro`     | `string`                                        | **Required**. Registro do funcionário              |
+| `nome`         | `string`                                        | **Required**. Nome do funcionário                  |
+| `email`        | `string`                                        | **Required**. Email do funcionário                 |
+| `status`       | `ativo, inativo`                                | **Required**. Status do funcionário                |
+| `vinculo`      | `Contratado, Concursado,  Substituto`           | **Required**. Vínculo empregatício do funcionário  |
+| `admissao`     | `date`                                          | **Required**. Date de admissão de Funcionário      |
+| `cargo`        | `Direção, Coordenação, Secretaria, Professor`   | **Required**. Cargo empregatício do funcionário    |
+| `RG`           | `string`                                        | **Required**. Documento RG do funcionário          |
+| `CPF`          | `string`                                        | **Required**. Documento CPF do funcionário         |
+| `nascimento`   | `date`                                          | **Required**. Data de nascimento do funcionário    |
+| `sexo`         | `M, F , ND`                                     | **Required**. Sexo de Funcionário                  |
+| `escolaridade` | `Graduação, Pós-graduação, Mestrado, Doutorado` | **Required**. Nível de escolaridade do funcionário |
+| `endereço`     | `string`                                        | **Required**. Data de nascimento do funcionário    |
 
 ### Editar um funcionário
 
@@ -162,28 +157,21 @@
 | :-------- | :------- | :------------------------------ |
 | `id`      | `string` | **Required**. Id do funcionário |
 
-| Body              | Type                                                        | Description                                    |
-| :---------------- | :---------------------------------------------------------- | :--------------------------------------------- |
-| `foto`            | `file`                                                      | Foto do funcionário                            |
-| `registro`        | `string`                                                    | Registro do funcionário                        |
-| `nome`            | `string`                                                    | Nome do funcionário                            |
-| `nomeSocial`      | `string`                                                    | Nome social do funcionário                     |
-| `status`          | `ativo, inativo`                                            | Status do funcionário                          |
-| `vinculo`         | `Contratado, Concursado, Convênio, Estatutário, Substituto` | Vínculo empregatício do funcionário            |
-| `admissao`        | `date`                                                      | Date de admissão de Funcionário                |
-| `cargo`           | `Direção, Coordenação, Secretaria, Professor, Auxiliar`     | Cargo empregatício do funcionário              |
-| `RG`              | `string`                                                    | Documento RG do funcionário                    |
-| `CPF`             | `string`                                                    | Documento CPF do funcionário                   |
-| `nascimento`      | `date`                                                      | Data de nascimento do funcionário              |
-| `sexo`            | `M, F , ND`                                                 | Sexo de Funcionário                            |
-| `estadoCivil`     | `Solteiro, Casado, Separado, Divorciado, Viúvo`             | Estado civil do funcionário                    |
-| `escolaridade`    | `Graduação, Pós-graduação, Mestrado, Doutorado`             | Nível de escolaridade do funcionário           |
-| `loginGsuite`     | `string`                                                    | Login na plataforma G Suite do funcionário     |
-| `senhaGsuite`     | `string`                                                    | Senha na plataforma G Suite do funcionário     |
-| `loginObjetivoSP` | `string`                                                    | Login na plataforma Objetivo SP do funcionário |
-| `senhaObjetivoSP` | `string`                                                    | Senha na plataforma Objetivo SP do funcionário |
-| `endereço`        | `FK`                                                        | FK(endereco):Data de nascimento do funcionário |
-| `docs`            | `file[]`                                                    | Documentos relacionados ao funcionário         |
+| Body           | Type                                            | Description                                        |
+| :------------- | :---------------------------------------------- | :------------------------------------------------- |
+| `registro`     | `string`                                        | **Required**. Registro do funcionário              |
+| `nome`         | `string`                                        | **Required**. Nome do funcionário                  |
+| `email`        | `string`                                        | **Required**. Email do funcionário                 |
+| `status`       | `ativo, inativo`                                | **Required**. Status do funcionário                |
+| `vinculo`      | `Contratado, Concursado,  Substituto`           | **Required**. Vínculo empregatício do funcionário  |
+| `admissao`     | `date`                                          | **Required**. Date de admissão de Funcionário      |
+| `cargo`        | `Direção, Coordenação, Secretaria, Professor`   | **Required**. Cargo empregatício do funcionário    |
+| `RG`           | `string`                                        | **Required**. Documento RG do funcionário          |
+| `CPF`          | `string`                                        | **Required**. Documento CPF do funcionário         |
+| `nascimento`   | `date`                                          | **Required**. Data de nascimento do funcionário    |
+| `sexo`         | `M, F , ND`                                     | **Required**. Sexo de Funcionário                  |
+| `escolaridade` | `Graduação, Pós-graduação, Mestrado, Doutorado` | **Required**. Nível de escolaridade do funcionário |
+| `endereço`     | `string`                                        | **Required**. Data de nascimento do funcionário    |
 
 ### Deletar um funcionário
 

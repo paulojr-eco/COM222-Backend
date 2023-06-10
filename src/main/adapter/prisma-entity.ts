@@ -1,5 +1,9 @@
+import { Employee } from '@domain/entities/employee';
 import { Student } from '@domain/entities/student';
-import { Student as PrismaStudent } from '@prisma/client';
+import {
+  Employee as PrismaEmployee,
+  Student as PrismaStudent,
+} from '@prisma/client';
 
 export const prismaAdapterStudent = (prismaStudent: PrismaStudent): Student => {
   const {
@@ -41,4 +45,44 @@ export const prismaAdapterStudent = (prismaStudent: PrismaStudent): Student => {
     id
   );
   return student;
+};
+
+export const prismaAdapterEmployee = (
+  prismaEmployee: PrismaEmployee
+): Employee => {
+  const {
+    email,
+    id,
+    nome,
+    CPF,
+    RG,
+    admissao,
+    cargo,
+    endereco,
+    escolaridade,
+    nascimento,
+    registro,
+    sexo,
+    status,
+    vinculo,
+  } = prismaEmployee;
+  const employee = Employee.create(
+    {
+      email,
+      nome,
+      CPF,
+      admissao,
+      cargo,
+      endereco,
+      escolaridade,
+      nascimento,
+      registro,
+      RG,
+      sexo,
+      status,
+      vinculo,
+    },
+    id
+  );
+  return employee;
 };
