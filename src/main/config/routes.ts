@@ -1,5 +1,4 @@
-import employees from '@main/routes/employees.routes';
-import students from '@main/routes/students.routes';
+import { employees, students } from '@main/routes';
 import { Router, type Express } from 'express';
 
 export default async (app: Express): Promise<void> => {
