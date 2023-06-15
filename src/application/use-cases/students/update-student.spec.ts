@@ -1,0 +1,97 @@
+import { describe, expect, it, vi } from 'vitest';
+
+import { InMemoryStudentRepository } from '@application/repositories/in-memory/in-memory-students';
+import { DbUpdateStudent } from './update-student';
+
+const makeSut = () => {
+  const inMemoryStudentRepository = new InMemoryStudentRepository();
+  const sut = new DbUpdateStudent(inMemoryStudentRepository);
+  return {
+    sut,
+    studentRepository: inMemoryStudentRepository,
+  };
+};
+
+const makeStudents = async (studentRepository: InMemoryStudentRepository) => {
+  studentRepository.create(
+    {
+      email: 'student1@example.com',
+      nome: 'student1',
+    },
+    'id1'
+  );
+  studentRepository.create(
+    {
+      email: 'student2@example.com',
+      nome: 'student2',
+    },
+    'id2'
+  );
+  studentRepository.create(
+    {
+      email: 'student3@example.com',
+      nome: 'student3',
+    },
+    'id3'
+  );
+};
+
+describe('Update student use case', () => {
+  it('should throw if an invalid id was provided', async () => {
+    const { sut } = makeSut();
+    const promise = sut.execute('id', {
+      email: 'student@example.com',
+      nome: 'student',
+    });
+    expect(promise).rejects.toThrow();
+  });
+
+  it('should call StudentRepository with correct values', async () => {
+    const { sut, studentRepository } = makeSut();
+    await makeStudents(studentRepository);
+    const updateSpy = vi.spyOn(studentRepository, 'update');
+    await sut.execute('id1', {
+      nome: 'student',
+      email: 'student@example.com',
+    });
+    expect(updateSpy).toHaveBeenCalledWith('id1', {
+      nome: 'student',
+      email: 'student@example.com',
+    });
+  });
+
+  it('should update a student on success even if no data is provided', async () => {
+    const { studentRepository, sut } = makeSut();
+    await makeStudents(studentRepository);
+    await sut.execute('id1', {});
+    expect(studentRepository.students).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          props: {
+            nome: 'student1',
+            email: 'student1@example.com',
+          },
+        }),
+      ])
+    );
+  });
+
+  it('should update a student on success', async () => {
+    const { studentRepository, sut } = makeSut();
+    await makeStudents(studentRepository);
+    await sut.execute('id1', {
+      email: 'student@example.com',
+      nome: 'student',
+    });
+    expect(studentRepository.students).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          props: {
+            nome: 'student',
+            email: 'student@example.com',
+          },
+        }),
+      ])
+    );
+  });
+});

@@ -1,0 +1,78 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Status {
+  ATIVO
+  INATIVO
+}
+
+enum Gender {
+  MASCULINO
+  FEMININO
+  NAODEFINIDO
+}
+
+enum Relation {
+  CONTRATADO
+  CONCURSADO
+  SUBSTITUTO
+}
+
+enum Role {
+  DIRECAO
+  COORDENACAO
+  SECRETARIA
+  PROFESSOR
+}
+
+enum Scholarity {
+  GRADUACAO
+  POSGRADUACAO
+  MESTRADO
+  DOUTORADO
+}
+
+model Student {
+  id               String   @id @default(uuid())
+  matricula        Int      @default(autoincrement())
+  nome             String
+  status           Status
+  serie            String
+  email            String
+  RG               String?
+  CPF              String?
+  nascimento       DateTime
+  sexo             Gender
+  endereco         String
+  emailResponsavel String
+  nomePai          String?
+  telefonePai      String?
+  nomeMae          String?
+  telefoneMae      String?
+}
+
+model Employee {
+  id           String     @id @default(uuid())
+  registro     Int        @default(autoincrement())
+  nome         String
+  email        String
+  status       Status
+  vinculo      Relation
+  admissao     DateTime
+  cargo        Role
+  RG           String
+  CPF          String
+  nascimento   DateTime
+  sexo         Gender
+  escolaridade Scholarity
+  endereco     String
+}
