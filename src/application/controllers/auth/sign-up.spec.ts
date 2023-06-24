@@ -134,10 +134,10 @@ describe('SignUp Controller', () => {
     expect(isValidSpy).toHaveBeenCalledWith('email@example.com');
   });
 
-  test('should return 500 if EmailValidator throws', async () => {
+  test('should return 400 if EmailValidator throws', async () => {
     const { sut, emailValidatorStub } = makeSut();
     vi.spyOn(emailValidatorStub, 'isValid').mockImplementationOnce(() => {
-      throw new Error('');
+      throw new Error('Error message.');
     });
     const httpRequest = {
       body: {
@@ -147,8 +147,8 @@ describe('SignUp Controller', () => {
       },
     };
     const httpResponse = await sut.handle(httpRequest);
-    expect(httpResponse.statusCode).toBe(500);
-    expect(httpResponse.body).toEqual(new ServerError());
+    expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.body).toEqual(new Error('Error message.'));
   });
 
   test('should call CreateAccount with correct values', async () => {
@@ -168,10 +168,27 @@ describe('SignUp Controller', () => {
     });
   });
 
+  test('should return 400 if CreateAccount throws an Error instance', async () => {
+    const { sut, createAccountStub } = makeSut();
+    vi.spyOn(createAccountStub, 'execute').mockImplementationOnce(async () => {
+      return await Promise.reject(new Error('Error message.'));
+    });
+    const httpRequest = {
+      body: {
+        email: 'email@example.com',
+        password: 'password',
+        passwordConfirmation: 'password',
+      },
+    };
+    const httpResponse = await sut.handle(httpRequest);
+    expect(httpResponse.statusCode).toBe(400);
+    expect(httpResponse.body).toEqual(new Error('Error message.'));
+  });
+
   test('should return 500 if CreateAccount throws', async () => {
     const { sut, createAccountStub } = makeSut();
     vi.spyOn(createAccountStub, 'execute').mockImplementationOnce(async () => {
-      return await Promise.reject(new Error(''));
+      return await Promise.reject();
     });
     const httpRequest = {
       body: {

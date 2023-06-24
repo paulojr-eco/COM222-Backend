@@ -1,5 +1,4 @@
-import { MissingParamError } from '@application/errors';
-import { InvalidParamError } from '@application/errors/invalid-param-error';
+import { InvalidParamError, MissingParamError } from '@application/errors';
 import {
   badRequest,
   created,
@@ -39,6 +38,9 @@ export class SignUpController implements Controller {
       await this.createAccount.execute({ email, password });
       return created();
     } catch (err) {
+      if (err instanceof Error) {
+        return badRequest(err);
+      }
       return serverError();
     }
   }
