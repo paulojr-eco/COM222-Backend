@@ -76,3 +76,9 @@ model Employee {
   escolaridade Scholarity
   endereco     String
 }
+
+model Account {
+  id       String @id @default(uuid())
+  email    String
+  password String
+}
