@@ -46,6 +46,14 @@ describe('Accounts Routes', () => {
         .expect(400);
     });
 
+    test('should return 400 on failure for existing email', async () => {
+      await request(app).post('/api/sign-up').send(makeAccountRouteBody());
+      await request(app)
+        .post('/api/sign-up')
+        .send(makeAccountRouteBody())
+        .expect(400);
+    });
+
     test('should return 201 on success', async () => {
       await request(app)
         .post('/api/sign-up')
