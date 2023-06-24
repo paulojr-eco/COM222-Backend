@@ -1,21 +1,43 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import { CreateAccountData } from '@application/repositories/account';
+import {
+  AccountRepository,
+  CreateAccountData,
+} from '@application/repositories/account';
 import { InMemoryAccountRepository } from '@application/repositories/in-memory/in-memory-accounts';
+import { Encrypter } from '@core/helpers/encrypter';
+import { CreateAccount } from '@domain/use-cases/account';
 import { DbCreateAccount } from './create-account';
 
-const makeSut = () => {
+const makeEncrypter = (): Encrypter => {
+  class EncrypterStub implements Encrypter {
+    async encrypt(value: string): Promise<string> {
+      return await Promise.resolve('hashedPassword');
+    }
+  }
+  return new EncrypterStub();
+};
+
+interface SutTypes {
+  sut: CreateAccount;
+  encrypterStub: Encrypter;
+  accountRepository: AccountRepository;
+}
+
+const makeSut = (): SutTypes => {
+  const encrypterStub = makeEncrypter();
   const inMemoryAccountRepository = new InMemoryAccountRepository();
-  const sut = new DbCreateAccount(inMemoryAccountRepository);
+  const sut = new DbCreateAccount(encrypterStub, inMemoryAccountRepository);
   return {
     sut,
     accountRepository: inMemoryAccountRepository,
+    encrypterStub,
   };
 };
 
 const makeHttpAccountBody = (): CreateAccountData => {
   return {
-    email: 'email@example',
+    email: 'email@example.com',
     password: 'password',
   };
 };
@@ -26,7 +48,10 @@ describe('Create account use case', () => {
     const createSpy = vi.spyOn(accountRepository, 'create');
     await sut.execute(makeHttpAccountBody());
     expect(createSpy).toHaveBeenCalledWith(
-      expect.objectContaining(makeHttpAccountBody())
+      expect.objectContaining({
+        email: 'email@example.com',
+        password: 'hashedPassword',
+      })
     );
   });
 
@@ -37,7 +62,10 @@ describe('Create account use case', () => {
     expect(accountRepository.accounts[0].id).toBeTruthy();
     expect(accountRepository.accounts[0]).toEqual(
       expect.objectContaining({
-        props: makeHttpAccountBody(),
+        props: {
+          email: 'email@example.com',
+          password: 'hashedPassword',
+        },
       })
     );
   });
