@@ -12,6 +12,10 @@ export interface GetAccountById {
   execute: (id: string) => Promise<Account | null>;
 }
 
+export interface GetAccountByEmail {
+  execute: (email: string) => Promise<Account | null>;
+}
+
 export interface UpdateAccount {
   execute: (
     id: string,

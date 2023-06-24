@@ -12,6 +12,12 @@ export class DbCreateAccount implements CreateAccount {
   ) {}
 
   async execute({ email, password }: CreateAccountData): Promise<void> {
+    const isEmailAlreadyRegistered = await this.accountRepository.getByEmail(
+      email
+    );
+    if (isEmailAlreadyRegistered) {
+      throw new Error('This email is already registered.');
+    }
     const hashedPassword = await this.encrypter.encrypt(password);
     await this.accountRepository.create({
       email,

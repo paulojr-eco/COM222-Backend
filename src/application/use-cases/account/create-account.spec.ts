@@ -55,6 +55,13 @@ describe('Create account use case', () => {
     );
   });
 
+  it('should throw if a provided email is already registered', async () => {
+    const { sut } = makeSut();
+    await sut.execute(makeHttpAccountBody());
+    const promise = sut.execute(makeHttpAccountBody());
+    expect(promise).rejects.toThrow();
+  });
+
   it('should create a new account on success', async () => {
     const { accountRepository, sut } = makeSut();
     await sut.execute(makeHttpAccountBody());

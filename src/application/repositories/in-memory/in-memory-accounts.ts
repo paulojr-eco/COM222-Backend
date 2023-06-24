@@ -27,6 +27,12 @@ export class InMemoryAccountRepository implements AccountRepository {
     return this.accounts.find((account) => account.id === id) ?? null;
   }
 
+  async getByEmail(email: string): Promise<Account | null> {
+    return (
+      this.accounts.find((account) => account.props.email === email) ?? null
+    );
+  }
+
   async update(id: string, data: UpdateAccountData): Promise<void> {
     this.accounts.forEach((account) => {
       if (account.id === id) {

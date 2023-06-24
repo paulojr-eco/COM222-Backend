@@ -35,6 +35,17 @@ export class PrismaAccountRepository implements AccountRepository {
     return account;
   }
 
+  async getByEmail(email: string): Promise<Account | null> {
+    const prismaAccount = await prisma.account.findFirst({
+      where: { email },
+    });
+    if (!prismaAccount) {
+      return null;
+    }
+    const account = prismaAdapterAccount(prismaAccount);
+    return account;
+  }
+
   async update(id: string, data: UpdateAccountData): Promise<void> {
     const { password } = data;
     await prisma.account.update({
