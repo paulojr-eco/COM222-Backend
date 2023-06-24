@@ -98,7 +98,7 @@ describe('Students Routes', () => {
           nome: 'nome',
           email: 'email@example.com',
         })
-        .expect(400 | 500);
+        .expect(400);
     });
 
     test('should return 200 on success', async () => {
@@ -118,7 +118,7 @@ describe('Students Routes', () => {
     test('should return 400 on failure', async () => {
       await request(app)
         .delete('/api/alunos/' + 'id')
-        .expect(400 | 500);
+        .expect(400);
     });
 
     test('should return 200 on success', async () => {

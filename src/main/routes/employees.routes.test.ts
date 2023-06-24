@@ -100,7 +100,7 @@ describe('Employees Routes', () => {
           nome: 'nome',
           email: 'email@example.com',
         })
-        .expect(400 | 500);
+        .expect(400);
     });
 
     test('should return 200 on success', async () => {
@@ -122,7 +122,7 @@ describe('Employees Routes', () => {
     test('should return 400 on failure', async () => {
       await request(app)
         .delete('/api/funcionarios/' + 'id')
-        .expect(400 | 500);
+        .expect(400);
     });
 
     test('should return 200 on success', async () => {
