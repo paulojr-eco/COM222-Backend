@@ -56,6 +56,16 @@ describe('Employees Routes', () => {
         .expect(400);
     });
 
+    test('should return 400 on failure for existing email', async () => {
+      await request(app)
+        .post('/api/funcionarios')
+        .send(makeEmployeeRouteBody());
+      await request(app)
+        .post('/api/funcionarios')
+        .send(makeEmployeeRouteBody())
+        .expect(400);
+    });
+
     test('should return 201 on success', async () => {
       await request(app)
         .post('/api/funcionarios')
@@ -90,7 +100,7 @@ describe('Employees Routes', () => {
           nome: 'nome',
           email: 'email@example.com',
         })
-        .expect(400 | 500);
+        .expect(400);
     });
 
     test('should return 200 on success', async () => {
@@ -112,7 +122,7 @@ describe('Employees Routes', () => {
     test('should return 400 on failure', async () => {
       await request(app)
         .delete('/api/funcionarios/' + 'id')
-        .expect(400 | 500);
+        .expect(400);
     });
 
     test('should return 200 on success', async () => {
