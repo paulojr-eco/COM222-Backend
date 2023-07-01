@@ -29,3 +29,8 @@ export const makeSignInController = (): SignInController => {
   );
   return new SignInController(emailValidator, authenticate);
 };
+
+export const makeEnsureAuthenticate = () => {
+  const tokenizer = new JWTTokenizerAdapter(env.secret, 1000 * 60 * 60 * 24);
+  return new AuthMiddleware(tokenizer);
+};
