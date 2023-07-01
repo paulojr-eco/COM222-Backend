@@ -23,14 +23,14 @@ describe('JWT Adapter', () => {
   test('should return a token on jwt sign success', async () => {
     const sut = makeSut();
     vi.spyOn(jwt, 'sign').mockReturnValueOnce('token' as unknown as void);
-    const token = sut.sign('value');
+    const token = await sut.sign('value');
     expect(token).toBe('token');
   });
 
   test('should call jwt verify with correct values', async () => {
     const sut = makeSut();
     const verifySpy = vi.spyOn(jwt, 'verify');
-    const token = sut.sign('value');
+    const token = await sut.sign('value');
     sut.verify(token);
     expect(verifySpy).toBeCalledWith(token, secret);
   });
@@ -40,7 +40,7 @@ describe('JWT Adapter', () => {
     vi.spyOn(jwt, 'verify').mockReturnValueOnce({
       value: 'verified',
     } as unknown as void);
-    const token = sut.verify('token');
+    const token = await sut.verify('token');
     expect(token).toBe('verified');
   });
 });

@@ -12,14 +12,16 @@ export class JWTTokenizerAdapter implements Tokenizer {
     private readonly expirationTime: number
   ) {}
 
-  sign(value: string): string {
-    return jwt.sign({ value }, this.secret, {
-      expiresIn: this.expirationTime,
-    });
+  sign(value: string): Promise<string> {
+    return Promise.resolve(
+      jwt.sign({ value }, this.secret, {
+        expiresIn: this.expirationTime,
+      })
+    );
   }
 
-  verify(token: string): string | undefined {
+  verify(token: string): Promise<string | undefined> {
     const payload = jwt.verify(token, this.secret) as VerifyResponsePayload;
-    return payload.value;
+    return Promise.resolve(payload.value);
   }
 }

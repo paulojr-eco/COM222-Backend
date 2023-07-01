@@ -1,4 +1,4 @@
 export interface Tokenizer {
-  sign: (value: string) => string;
-  verify: (token: string) => string | undefined;
+  sign: (value: string) => Promise<string>;
+  verify: (token: string) => Promise<string | undefined>;
 }

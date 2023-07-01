@@ -21,11 +21,11 @@ const makeEncrypter = (): Encrypter => {
 
 const makeTokenizer = (): Tokenizer => {
   class TokenizerStub implements Tokenizer {
-    sign(value: string): string {
-      return 'token';
+    sign(value: string): Promise<string> {
+      return Promise.resolve('token');
     }
-    verify(token: string): string | undefined {
-      return 'value';
+    verify(token: string): Promise<string | undefined> {
+      return Promise.resolve('value');
     }
   }
   return new TokenizerStub();
