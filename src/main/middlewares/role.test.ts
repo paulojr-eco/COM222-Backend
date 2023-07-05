@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { afterAll, beforeEach, describe, test } from 'vitest';
+import { afterAll, beforeAll, describe, test } from 'vitest';
 
 import { JWTTokenizerAdapter } from '@main/adapter/jwt-tokenizer';
 import app from '@main/config/app';
@@ -11,7 +11,7 @@ import { is } from './role';
 describe('Role Middleware', () => {
   let token = '';
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     await prisma.$connect();
     const account = await prisma.account.create({
       data: {
