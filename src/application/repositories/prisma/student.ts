@@ -25,6 +25,7 @@ export class PrismaStudentRepository implements StudentRepository {
       status,
       telefoneMae,
       telefonePai,
+      avatar,
     } = data;
     await prisma.student.create({
       data: {
@@ -43,6 +44,7 @@ export class PrismaStudentRepository implements StudentRepository {
         RG,
         telefoneMae,
         telefonePai,
+        avatar,
       },
     });
   }

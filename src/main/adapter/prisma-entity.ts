@@ -25,6 +25,7 @@ export const prismaAdapterStudent = (prismaStudent: PrismaStudent): Student => {
     status,
     telefoneMae,
     telefonePai,
+    avatar,
   } = prismaStudent;
   const student = Student.create(
     {
@@ -43,6 +44,7 @@ export const prismaAdapterStudent = (prismaStudent: PrismaStudent): Student => {
       status,
       telefoneMae,
       telefonePai,
+      avatar,
     },
     id
   );
