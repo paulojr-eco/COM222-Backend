@@ -69,6 +69,7 @@ export const prismaAdapterEmployee = (
     sexo,
     status,
     vinculo,
+    avatar,
   } = prismaEmployee;
   const employee = Employee.create(
     {
@@ -85,6 +86,7 @@ export const prismaAdapterEmployee = (
       sexo,
       status,
       vinculo,
+      avatar,
     },
     id
   );

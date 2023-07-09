@@ -94,6 +94,7 @@ export class PrismaStudentRepository implements StudentRepository {
       status,
       telefoneMae,
       telefonePai,
+      avatar,
     } = data;
     await prisma.student.update({
       where: { id },
@@ -113,6 +114,7 @@ export class PrismaStudentRepository implements StudentRepository {
         status,
         telefoneMae,
         telefonePai,
+        avatar,
       },
     });
   }
