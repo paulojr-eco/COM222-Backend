@@ -8,38 +8,6 @@ import prisma from '@main/config/prisma';
 
 const filePath = path.resolve(__dirname, '..', '..', '__tests__');
 
-const makeStudentRouteBody = (ignoredAttr?: string) => {
-  const fakeStudent: any = {
-    matricula: 123,
-    nome: 'nome',
-    status: 'ATIVO',
-    serie: 'serie',
-    email: 'email@example.com',
-    nascimento: new Date('2000-01-01'),
-    sexo: 'MASCULINO',
-    endereco: 'endereco',
-    emailResponsavel: 'emailResponsavel@example.com',
-    CPF: null,
-    RG: null,
-    nomeMae: null,
-    nomePai: null,
-    telefoneMae: null,
-    telefonePai: null,
-  };
-
-  const filteredKeys = Object.keys(fakeStudent).filter(
-    (key) => !ignoredAttr || key !== ignoredAttr
-  );
-
-  return Object.assign(
-    {},
-    filteredKeys.reduce((acc: any, key) => {
-      acc[key] = fakeStudent[key];
-      return acc;
-    }, {})
-  );
-};
-
 describe('Students Routes', async () => {
   let userToken = '';
   let adminToken = '';
