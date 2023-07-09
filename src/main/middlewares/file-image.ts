@@ -8,6 +8,11 @@ export const fileImage = () => {
     next: NextFunction
   ): Promise<void> => {
     if (!req.file) {
+      if (req.method === 'PUT') {
+        next();
+        return;
+      }
+
       res.statusCode = 400;
       res.json({ error: 'File not found' });
       return;
