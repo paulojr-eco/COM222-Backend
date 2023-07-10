@@ -1,12 +1,12 @@
-export const student = {
+export const employee = {
   get: {
     security: [
       {
         bearerAuth: [],
       },
     ],
-    tags: ['Alunos'],
-    summary: 'API para listar todas os alunos',
+    tags: ['Funcionários'],
+    summary: 'API para listar todas os funcionários',
     description:
       'Essa rota só pode ser executada por **usuários autenticados**',
     responses: {
@@ -17,7 +17,7 @@ export const student = {
             schema: {
               type: 'array',
               items: {
-                $ref: '#/schemas/student',
+                $ref: '#/schemas/employee',
               },
             },
           },
@@ -46,15 +46,15 @@ export const student = {
         bearerAuth: [],
       },
     ],
-    tags: ['Alunos'],
-    summary: 'API para criar um aluno',
+    tags: ['Funcionários'],
+    summary: 'API para criar um funcionário',
     description: 'Essa rota só pode ser executada por **administradores**',
     requestBody: {
       required: true,
       content: {
         'multipart/form-data': {
           schema: {
-            $ref: '#/schemas/createStudentParams',
+            $ref: '#/schemas/createEmployeeParams',
           },
         },
       },
