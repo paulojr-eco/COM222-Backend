@@ -1,5 +1,5 @@
 import * as components from './components';
-import * as paths from './paths';
+import paths from './paths';
 import * as schemas from './schemas';
 
 export default {
@@ -15,13 +15,13 @@ export default {
       url: '',
     },
     license: {
-      name: '',
-      url: '',
+      name: 'MIT License',
+      url: 'https://github.com/paulojr-eco/COM222-Backend/blob/main/LICENSE',
     },
   },
   externalDocs: {
     description: 'Link para o repositório do projeto frontend',
-    url: '',
+    url: 'https://github.com/paulojr-eco/COM222-Frontend',
   },
   servers: [
     {
@@ -30,6 +30,10 @@ export default {
     },
   ],
   tags: [
+    {
+      name: 'Login',
+      description: 'APIs relacionadas a Login',
+    },
     {
       name: 'Alunos',
       description: 'APIs relacionadas a Alunos',
