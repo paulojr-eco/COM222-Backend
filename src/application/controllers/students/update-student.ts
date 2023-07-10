@@ -11,7 +11,11 @@ export class UpdateStudentController implements Controller {
     try {
       const { id } = httpRequest.params;
       const avatar = httpRequest.base64File ?? null;
-      const data = { ...httpRequest.body, avatar };
+      const data = {
+        ...httpRequest.body,
+        matricula: Number(httpRequest.body.matricula),
+        avatar,
+      };
       if (!id) {
         return badRequest(new MissingParamError('id'));
       }
