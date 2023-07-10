@@ -13,7 +13,6 @@ export class UpdateEmployeeController implements Controller {
       const avatar = httpRequest.base64File ?? null;
       const data = {
         ...httpRequest.body,
-        registro: Number(httpRequest.body.registro),
         avatar,
       };
       if (!id) {

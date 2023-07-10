@@ -13,7 +13,6 @@ export class UpdateStudentController implements Controller {
       const avatar = httpRequest.base64File ?? null;
       const data = {
         ...httpRequest.body,
-        matricula: Number(httpRequest.body.matricula),
         avatar,
       };
       if (!id) {
