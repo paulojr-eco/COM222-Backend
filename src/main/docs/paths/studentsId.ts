@@ -69,7 +69,7 @@ export const studentId = {
     requestBody: {
       required: true,
       content: {
-        'application/json': {
+        'multipart/form-data': {
           schema: {
             $ref: '#/schemas/updateStudentParams',
           },

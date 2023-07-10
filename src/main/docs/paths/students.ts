@@ -52,7 +52,7 @@ export const student = {
     requestBody: {
       required: true,
       content: {
-        'application/json': {
+        'multipart/form-data': {
           schema: {
             $ref: '#/schemas/createStudentParams',
           },
