@@ -15,7 +15,7 @@ export const signUp = {
     },
     responses: {
       201: {
-        description: 'Sucesso',
+        description: 'Sucesso, mas sem dados para exibir',
       },
       400: {
         $ref: '#/components/badRequest',

@@ -1,6 +1,6 @@
-import * as components from './components';
+import components from './components';
 import paths from './paths';
-import * as schemas from './schemas';
+import schemas from './schemas';
 
 export default {
   openapi: '3.0.0',
